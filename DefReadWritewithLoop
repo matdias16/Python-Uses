@@ -1,0 +1,55 @@
+# Fução com dois parâmetros para atualização de arquivos.
+
+def update_file(import_file, remove_list):
+
+  # Leitura inicial do que está no arquivo importado.
+
+  with open(import_file, "r") as file:
+
+    # Uso do método read() para ler o que foi importado em "file" e armazenar numa variável.
+
+    ip_addresses = file.read()
+
+  # Converter em list a string que foi lida anteriormente do arquivo importado
+
+  ip_addresses = ip_addresses.split()
+
+  # Uso de loop para cada elemento dentro da string criada`
+
+  for element in ip_addresses:
+    
+    # Uso de uma condicional para verificação de cada elemento a partir de uma lista
+    
+    if element in remove_list:
+
+      # Remoção do elemento caso ele esteja na lista de remoção.
+
+      ip_addresses.remove(element)
+
+  # Converter o conteúdo da variável "ip_address" para string, pra podermos escrever nela.   
+
+  ip_addresses = " ".join(ip_addresses)
+
+  # uso do método open para escrever no arquivo original.
+
+  with open(import_file, "w") as file:
+
+    # reescrevendo no arquivo original o conteúdo atualizado da variável criada "ip_addresses" já com a remoção dos elementos que estavam na condição.
+
+    file.write(ip_addresses)
+
+# Chamando a função update_file.
+
+update_file("allow_list.txt", ["192.168.25.60", "192.168.140.81", "192.168.203.198"])
+
+# Leitura do arquivo final após a inserção dos parâmetros da função.
+
+with open("allow_list.txt", "r") as file:
+
+  # ler o arquivo.
+
+  text = file.read()
+
+# imprimir o que está no arquivo.
+
+print(text)
